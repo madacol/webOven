@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{start_time}} {{duration_sec}}</h1>
+    <form action="/graph" method="POST">
+        <label for="date">Fecha: </label>
+            <input type="date" name="date" id="date" value={{date}}>
+        <br> <br>
+        <label for="start_time">Hora de Inicio:</label>
+            <input type="time" name="start_time" id="start_time">
+        <br> <br>
+        <label for="duration_min">Duracion:</label>
+            <input id="duration_15min" type="radio" name="duration_min" value="15"><label for="duration_15min">15 min</label>
+            <input id="duration_30min" type="radio" name="duration_min" value="30" checked><label for="duration_30min">30 min</label>
+            <input id="duration_45min" type="radio" name="duration_min" value="45"><label for="duration_45min">45 min</label>
+            <input id="duration_60min" type="radio" name="duration_min" value="60"><label for="duration_60min">60 min</label>
+        <br> <br>
+        <input type="submit" value="Generar gráfico">
+        <br> <br>
+    </form>
+
+    <img src="/static/graph.png" alt="grafico">
+</body>
+</html>
