@@ -4,27 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>ArduinoOven</title>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>{{start_time}} {{duration_sec}}</h1>
+    <h1>{{title}}</h1>
     <form action="/graph" method="POST">
-        <label for="date">Fecha: </label>
-            <input type="date" name="date" id="date" value={{date}}>
-        <br> <br>
-        <label for="start_time">Hora de Inicio:</label>
-            <input type="time" name="start_time" id="start_time">
-        <br> <br>
-        <label for="duration_min">Duracion:</label>
-            <input id="duration_15min" type="radio" name="duration_min" value="15"><label for="duration_15min">15 min</label>
-            <input id="duration_30min" type="radio" name="duration_min" value="30" checked><label for="duration_30min">30 min</label>
-            <input id="duration_45min" type="radio" name="duration_min" value="45"><label for="duration_45min">45 min</label>
-            <input id="duration_60min" type="radio" name="duration_min" value="60"><label for="duration_60min">60 min</label>
-        <br> <br>
-        <input type="submit" value="Generar gráfico">
-        <br> <br>
+        <div class="row">
+            <div class="right-flex">
+                <label for="date">Fecha: </label>
+            </div>
+            <div class="left-flex">
+                <input type="date" name="date" id="date" value={{date}}>
+            </div>
+        </div>
+        <div class="row">
+            <div class="right-flex">
+                <label for="duration_min">Duracion:</label>
+            </div>
+            <div class="left-flex">
+                <label for="duration_15min"><input id="duration_15min" type="radio" name="duration_min" value="15" {{"checked" if duration_min==15 else ""}}>15 min</label>
+                <label for="duration_30min"><input id="duration_30min" type="radio" name="duration_min" value="30" {{"checked" if duration_min==30 else ""}}>30 min</label>
+                <label for="duration_45min"><input id="duration_45min" type="radio" name="duration_min" value="45" {{"checked" if duration_min==45 else ""}}>45 min</label>
+                <label for="duration_60min"><input id="duration_60min" type="radio" name="duration_min" value="60" {{"checked" if duration_min==60 else ""}}>60 min</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="right-flex">
+                <label for="start_time">Hora de Inicio:</label>
+            </div>
+            <div class="left-flex">
+                <input type="time" name="start_time" id="start_time" value={{time}}>
+            </div>
+        </div>
+
+        <div class="row">
+            <input class="button" type="submit" value="Generar gráfico">
+        </div>
+
     </form>
 
-    <img src="/static/graph.png" alt="grafico">
+    <div style="display: flex; justify-content: center; margin: 60px">
+        <img src="/static/graph.png" alt="grafico">
+    </div>
 </body>
 </html>

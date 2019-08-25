@@ -1,0 +1,33 @@
+.row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.box {
+    display: flex;
+}
+.right-flex {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.left-flex {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: wrap;
+}
+.column-flex {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-content: flex-start;
+}
+.button {
+    padding: 10px;
+}
+label {
+    align-self: center;
+    margin: 5px;
+}
