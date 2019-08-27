@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, url_for
 from datetime import datetime, timedelta
+import subprocess, json
+from graph import graphJson
 app = Flask(__name__)
 
 @app.route('/')
@@ -24,11 +26,16 @@ def graph():
     end_datetime_str = end_datetime.strftime("%Y-%m-%dT%H:%M")
 
     # Filter data log and finish formatting into Json
-    input_file = "pid.log"
-    output_file = "/tmp/ArduinoOven_json"
-    filterdate_outputjson_bash_script = ["bash", "logFilterDate.sh", start_datetime_str, end_datetime_str, input_file, output_file]
-    import subprocess
+    input_filepath = "pid.log"
+    output_filepath = "/tmp/ArduinoOven_json"
+    filterdate_outputjson_bash_script = ["bash", "logFilterDate.sh", start_datetime_str, end_datetime_str, input_filepath, output_filepath]
     subprocess.Popen(filterdate_outputjson_bash_script)
+
+    # Parse data and Graph
+    json_file = open(output_filepath,'r')
+    readings = json.load(json_file)
+
+    graphJson(readings)
 
     #import graph.py
 
