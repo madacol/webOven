@@ -12,13 +12,24 @@ def index():
 
 @app.route('/graph', methods=['POST'] )
 def graph():
+    # Set parameters
     date_str = request.form["date"]
     time_str = request.form["start_time"]
     duration_min = int(request.form["duration_min"])
     
-    start_datetime_str = " ".join([date_str, time_str])
-    start_datetime = datetime.strptime( start_datetime_str, "%Y-%m-%d %H:%M" )
+    # Calculate End time
+    start_datetime_str = "T".join([date_str, time_str])
+    start_datetime = datetime.strptime( start_datetime_str, "%Y-%m-%dT%H:%M" )
     end_datetime = start_datetime + timedelta(minutes=duration_min)
+    end_datetime_str = end_datetime.strftime("%Y-%m-%dT%H:%M")
+
+    # Filter data log and finish formatting into Json
+    input_file = "pid.log"
+    output_file = "/tmp/ArduinoOven_json"
+    filterdate_outputjson_bash_script = ["bash", "logFilterDate.sh", start_datetime_str, end_datetime_str, input_file, output_file]
+    import subprocess
+    subprocess.Popen(filterdate_outputjson_bash_script)
+
     #import graph.py
 
     url_for('static', filename='graph.png')
