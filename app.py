@@ -45,4 +45,4 @@ def graph():
 
     url_for('static', filename='graph.png')
     url_for('static', filename='style.css')
-    return render_template("index.html", date=date_str, time=time_str, title=str(end_datetime), duration_min=duration_min)
+    return render_template("index.html", date=date_str, time=time_str, duration_min=duration_min)
