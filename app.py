@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, url_for
 from datetime import datetime, timedelta
-import subprocess, json
+from subprocess import check_output
 from graph import graphJson
+import json
 app = Flask(__name__)
 
 @app.route('/')
@@ -27,15 +28,17 @@ def graph():
 
     # Filter data log and finish formatting into Json
     input_filepath = "pid.log"
-    output_filepath = "/tmp/ArduinoOven_json"
-    filterdate_outputjson_bash_script = ["bash", "logFilterDate.sh", start_datetime_str, end_datetime_str, input_filepath, output_filepath]
-    subprocess.Popen(filterdate_outputjson_bash_script)
+    filterdate_outputjson_bash_script = ["bash", "logFilterDate.sh", start_datetime_str, end_datetime_str, input_filepath]
+    json_data = check_output(filterdate_outputjson_bash_script)
 
     # Parse data and Graph
-    json_file = open(output_filepath,'r')
-    readings = json.load(json_file)
-
-    graphJson(readings)
+    try:
+        readings = json.loads(json_data)
+        graphJson(readings)
+    except RuntimeError as e:
+        print(e)
+    except json.JSONDecodeError as e:
+        print(e)
 
     #import graph.py
 
