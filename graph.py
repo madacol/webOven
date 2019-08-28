@@ -35,7 +35,9 @@ def graphJson(readings):
 
     y=data['PID_top']['input']
     x=[x/60 for x in range(len(y))]
-    plt.plot(x,y); plt.show()
+    plt.plot(x,y)
+    plt.savefig("/tmp/ArduinoOven_graph.png")
+    plt.clf()  #Flush data
 
     # Generate array of tuple for plotting multiple lines
     # array_tuples=[ [ data['PID_top']['output'][i], data['PID_top']['input'][i] ] for i in range(len(data['PID_top']['output'])) ]

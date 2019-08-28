@@ -4,6 +4,7 @@ from subprocess import check_output
 from graph import graphJson
 import json
 app = Flask(__name__)
+app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0  #Disable Caching
 
 @app.route('/')
 def index():
@@ -31,7 +32,7 @@ def graph():
     filterdate_outputjson_bash_script = ["bash", "logFilterDate.sh", start_datetime_str, end_datetime_str, input_filepath]
     json_data = check_output(filterdate_outputjson_bash_script)
 
-    # Parse data and Graph
+    # Parse json_data and Graph
     try:
         readings = json.loads(json_data)
         graphJson(readings)
@@ -39,8 +40,8 @@ def graph():
         print(e)
     except json.JSONDecodeError as e:
         print(e)
-
-    #import graph.py
+    except UnicodeDecodeError as e:
+        print(e)
 
     url_for('static', filename='graph.png')
     url_for('static', filename='style.css')
