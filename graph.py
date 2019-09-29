@@ -1,9 +1,7 @@
 from matplotlib import pyplot as plt
 
-def graphJson(readings):
+def shapeJson(readings):
     data={}
-
-    print("Shaping data")
 
     for reading in readings:
         # Initialize data structure if necessary
@@ -17,9 +15,9 @@ def graphJson(readings):
         data[reading["name"]]["input"].append(      float(reading['data']['Input']) )
         data[reading["name"]]["setpoint"].append(   float(reading['data']['Setpoint']) )
         data[reading["name"]]["output"].append(     float(reading['data']['Output']) )
+    return data
 
-
-    print("Graphing")
+def graphData(data):
 
     ######## NOT FINISHED - DOUBLE AXIS
     # fig = plt.figure()
