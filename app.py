@@ -34,7 +34,7 @@ def graph():
 
     # Parse json_data and Graph
     try:
-        readings = json.loads(json_data)
+        readings = json.loads(json_data.decode('utf-8'))
         graphJson(readings)
     except RuntimeError as e:
         print(e)
