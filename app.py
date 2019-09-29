@@ -46,6 +46,8 @@ def graph():
 
         app.logger.debug("Graphing")
         graphData(graphingData)
+
+        app.logger.debug("Responding")
     except RuntimeError as e:
         app.logger.error(e)
     except json.JSONDecodeError as e:
