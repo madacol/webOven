@@ -3,6 +3,8 @@ from matplotlib import pyplot as plt
 def graphJson(readings):
     data={}
 
+    print("Shaping data")
+
     for reading in readings:
         # Initialize data structure if necessary
         if not data.__contains__(reading["name"]):
@@ -17,7 +19,9 @@ def graphJson(readings):
         data[reading["name"]]["output"].append(     float(reading['data']['Output']) )
 
 
-    ######## NOT FINISHED - DOBULE AXIS
+    print("Graphing")
+
+    ######## NOT FINISHED - DOUBLE AXIS
     # fig = plt.figure()
     # ax1 = fig.add_subplot(111)
     # ax1.plot(x, y1)

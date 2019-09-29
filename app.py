@@ -30,10 +30,12 @@ def graph():
     # Filter data log and finish formatting into Json
     input_filepath = "pid.log"
     filterdate_outputjson_bash_script = ["bash", "logFilterDate.sh", start_datetime_str, end_datetime_str, input_filepath]
+    print("Running command:\"", " ".join(filterdate_outputjson_bash_script), "\"")
     json_data = check_output(filterdate_outputjson_bash_script)
 
     # Parse json_data and Graph
     try:
+        print("Parsing Json")
         readings = json.loads(json_data.decode('utf-8'))
         graphJson(readings)
     except RuntimeError as e:
