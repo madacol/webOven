@@ -35,12 +35,11 @@
 
 ## Load config file
 
-    sudo supervisorctl
-    supervisor> update
-    supervisor> status
+    sudo supervisorctl update
+    sudo supervisorctl status
 
 ## Restart app
 
 Useful when app doesn't starts and needs further tweakings
 
-    supervisor> restart weboven:
+    sudo supervisorctl restart weboven:
