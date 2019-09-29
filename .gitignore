@@ -4,3 +4,5 @@ __pycache__/
 .venv/
 
 server.log
+
+.vscode/.ropeproject/objectdb
